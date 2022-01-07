@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ "/css/normalize.css" | relURL }}"/>
 
     {{- $sass := resources.Get "scss/style.scss" -}}
-    {{- $style := $sass | resources.ToCSS (dict "targetPath" "css/style.css" "transpiler" "dartsass" "enableSourceMap" "true" "outputStyle" "compressed")  -}}
+    {{- $style := $sass | resources.ToCSS (dict "targetPath" "css/style.css" "transpiler" "libsass" "enableSourceMap" "true" "outputStyle" "compressed")  -}}
     <link rel="stylesheet" href="{{ $style.Permalink }}"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
