@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    {{- partial "head.html" . -}}
+    <body>
+        <div class="wrap">
+            {{- partial "header.html" . -}}
+            <div id="content">
+            {{- block "main" . }}{{- end }}
+            </div>
+        </div>
+        {{- partial "footer.html" . -}}
+    </body>
+    <script src="{{ "/js/glightbox.min.js" | relURL }}"></script>
+    <script>var lightbox = GLightbox();</script>
+</html>

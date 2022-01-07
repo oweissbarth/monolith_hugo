@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    {{- partial "head.html" . -}}
+    <link rel="stylesheet" href="{{ "/css/onepage-scroll.css" | relURL }}" type="text/css"/>
+    <script src="{{ "/js/onepage-scroll.min.js" | relURL }}"></script>
+    <body>
+        <header class="fixed inverted">{{- partial "menu.html" . -}}</header>
+
+        <main id="pureFullPage">
+            <section class="page">
+                <div class="greeter">
+                    <div class="title-container">
+                        <span class="site-title homepage">{{ .Site.Title}}</span>
+                        <span class="site-tag homepage">{{ .Site.Params.description}}</span>
+                    </div>
+                    <video class="greeter-video" autoplay>
+                        <source src="{{.Site.Params.Greeter.video}}"/>
+                    </video>
+                    <img class="greeter-img" src="{{.Site.Params.Greeter.image}}"/>
+                </div>
+                <div class="greeter-overlay" ><img src="{{ "/images/pattern.png" | relURL }}"/></div>
+            </section>
+            <section class="page">
+                <div class="content-centered">
+                    <h2 class="centered">About me</h2>
+                    {{ $original := resources.Get .Site.Params.meImage }}
+                    {{ .Scratch.Set "image" ($original.Fill "200x200") }}
+                    {{ $image := .Scratch.Get "image" }}
+                    <img src="{{$image.Permalink}}" class="rounded centered meimage"/>
+                    <p class="centered">My Name is Oliver Weissbarth. I am a Software Engineer with a passion for computer graphics based in Berlin/Germany.</p>
+                    <p class="centered">I enjoy creating graphics as well as creating tools for artists.</p>
+                    <p class="centered">I am also interested in photography and other visual art forms.</p>
+                </div>
+            </section>
+            <section class="page">
+                <div class="content-centered">
+                    <h2 class="centered">Featured Projects</h2>
+                    <div class="projects-container">
+                        {{ range .Site.Params.project }}
+                        <div class="projects-item">
+                            {{ $original := resources.Get .image }}
+                            {{ $image := ($original.Fill "600x300")}}
+                            <img src="{{ $image.Permalink }}"/>
+                            <div class="projects-item-content">
+                                <h3>{{.name}}</h3>
+                                <p>{{.description}}</p>
+                                <a href="{{.url}}" ><button class="ghost-light">more</button></a>
+                            </div>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script>
+            function updateColorScheme(index){
+                if(index%2 == 1){
+                    setColorSchemeForNode(document.getElementsByClassName("onepage-pagination")[0], "light");
+                    setColorSchemeForNode(document.getElementsByClassName("nav")[0], "light");
+                    setColorSchemeForNode(document.getElementsByClassName("menu-toggle-label")[0], "light");
+
+                }else{
+                    setColorSchemeForNode(document.getElementsByClassName("onepage-pagination")[0], "dark");
+                    setColorSchemeForNode(document.getElementsByClassName("nav")[0], "dark");
+                    setColorSchemeForNode(document.getElementsByClassName("menu-toggle-label")[0], "dark");
+                }
+            }
+
+            function setColorSchemeForNode(node, scheme){
+                if(scheme == "light"){
+                    node.classList.remove("dark")
+                    node.classList.add("light")
+                }else{
+                    node.classList.remove("light")
+                    node.classList.add("dark")
+                }
+            }
+
+            (function(){
+                onePageScroll("main", {
+                    sectionContainer: "section",
+                    updateURL: true,
+                    beforeMove: updateColorScheme
+                });
+                updateColorScheme(document.querySelector("section.active").dataset.index);
+            })();
+            
+        </script>
+    </body>
+</html>

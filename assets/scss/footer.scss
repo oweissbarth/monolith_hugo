@@ -1,0 +1,32 @@
+
+@import 'variables';
+
+/***********************************************
+				Footer
+***********************************************/
+
+footer{
+	flex-shrink: 0;
+	background-color: $dark-background;
+	height: 12em;
+	color:#c2c2c2;
+	/*padding: 1em;*/
+	text-align: center;
+	line-height: 2em;
+	width: 100%;
+	box-shadow: 0 -5px 5px #2E2E2E;
+}
+
+footer > span{
+    display: block;
+}
+
+/*Sticky footer */
+.wrap{
+	 flex: 1 0 auto;
+}
+
+body{
+	display: flex;
+	flex-direction: column;
+}

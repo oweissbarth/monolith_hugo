@@ -1,0 +1,15 @@
+<input id="menu-toggle-check" type="checkbox">
+<label class="menu-toggle-label" for="menu-toggle-check"><i class="menu-toggle fa fa-bars fa-2x"></i></label>
+
+<nav id="nav" class="nav main menu">
+    {{ range .Site.Menus.main }}
+    <a class="nav-link menu-item" href="{{ .URL }}">
+    {{ if .Pre }}
+    {{ $icon := printf "<i data-feather=\"%s\"></i> " .Pre | safeHTML }}
+    {{ $icon }}
+    {{ end }}
+    {{ $text := print .Name | safeHTML }}
+    {{ $text }}
+    </a>
+    {{ end }}
+</nav>

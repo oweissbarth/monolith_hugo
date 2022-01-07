@@ -1,0 +1,17 @@
+<div class="survey_image">
+    {{ $original := resources.Get (.Get "imageurl") }}
+    <a class="glightbox" href="{{ $original.RelPermalink }}">
+        {{ .Scratch.Set "image" ($original.Fill "200x200") }}
+        {{ $image := .Scratch.Get "image" }}
+        <img class="preview" src="{{ $image.RelPermalink }}"/>
+    </a>
+    <div class="correct_label">{{ .Get "correctlabel" }}</div>
+    <div class="credits">
+        <div class="author">author: <b>{{ .Get "author" }}</b></div>
+        <div class="title">title: <b>{{ .Get "title" }}</b></div>
+        {{ if isset . "sourceurl" }}
+        <div class="link">source: <a target="_blank" href="{{ .Get "sourceurl" }}">link</a></div>
+        {{ end }}
+    </div>
+    <div class="average_accuracy">{{ .Get "accuracy" }}</div>
+</div>

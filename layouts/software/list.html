@@ -1,0 +1,72 @@
+{{ define "main" }}
+<main>
+    <section>
+    <!-- Ranges through content/posts/*.md -->
+    {{ range .Pages.ByWeight }}
+        <article class="sp-software-page">
+            <div class="software-title">
+               <h3>{{.Title}}</h3>
+            </div>
+            <div class="software-content">
+                <div class="software-featured-image">
+                    {{ $original := resources.Get .Params.icon }}
+                    {{ $image :=  ($original.Fill "200x200") }}
+                    <a href="{{.Permalink}}"><img src="{{$image.RelPermalink}}" /></a>
+                </div><div class="software-description">
+                    <p>{{.Description}}</p>
+                    <a href="{{.Permalink}}" class="software-readmore"><button class="software-readmore">Read more</button></a>
+                </div>
+                <div class="software-info">
+                    <div class="item">
+                        <p class="label">Version</p>
+                        <p class="value">{{.Params.version}}</p>
+                    </div>
+                    <div class="item">
+                        <p class="label">License</p>
+                        <p class="value">{{.Params.license}}</p>
+                    </div>
+                    <div class="item">
+                        <p class="label">Author</p>
+                        <p class="value">{{.Params.author}}</p>
+                    </div>
+                    <div class="item">
+                        <p class="label">Platform</p>
+                        <p class="value">{{.Params.platform}}</p>
+                    </div>
+                    <div class="item">
+                        <p class="label">Language</p>
+                        <p class="value">{{.Params.language}}</p>
+                    </div>
+                    <div class="item">
+                        <p class="label">Downloads</p>
+                        <p class="value download_count" data-download="{{.Params.download_id}}"></p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {{ end }}
+      </section>
+      <script>
+            function get_download_count(element){
+                var id = element.dataset.download;
+                fetch("{{.Site.Params.staticsitecompanion_url}}/download/"+id+"/count")
+                .then(res => res.json())
+                .then(j => update_download_counter(element, j))
+            }
+
+            function update_download_counter(element, response){
+                console.log(response)
+                element.innerHTML = response["count"];
+            }
+
+
+          (function(){
+            var counters = document.getElementsByClassName("download_count");
+            for(let c of counters){
+                get_download_count(c);
+            }
+          })();
+      </script>
+</main>
+{{ end }}
+

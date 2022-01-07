@@ -1,0 +1,12 @@
+{{ $uid := .Get "uid" }}
+<div id="{{$uid}}">
+    {{$image := resources.Get (.Get "imgLeft")}}
+    <img src="{{$image.RelPermalink}}"/>
+    {{$image := resources.Get (.Get "imgRight")}}
+    <img src="{{$image.RelPermalink}}"/>
+</div>
+<script>
+    window.onload = function(){
+        im = new imReveal(document.getElementById("{{$uid}}"))
+    }
+</script>

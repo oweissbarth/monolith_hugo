@@ -1,0 +1,62 @@
+/***********************************************
+				Comments
+***********************************************/
+
+.comment-list ol, .comment-list {
+	list-style-type: none;
+	padding-left: 2em;
+}
+
+@media screen and (min-width: 740px) {
+	.comment-list ol, .comment-list {
+		list-style-type: none;
+		padding-left: 5em;
+	}
+}
+
+.comment-list{
+	padding-right: 0.5em;
+	padding-left: 0.5em;
+}
+
+.comment{
+	margin: 2em 0;
+	padding: 0.5em;
+	border-radius: 5px;
+}
+
+.comment-author>img{
+	float: left;
+	border-radius: 5px;
+}
+
+.comment-content, .reply{
+	margin-left: 5em;
+}
+.fn{
+	margin-left: 1em;
+	display: inline;
+}
+
+.comment-author{
+	display: inline;
+}
+
+.comment-metadata{
+	display: inline;
+}
+
+.comment-metadata>a, .reply>a{
+	font-size: 0.85em;
+	color: grey;
+	text-decoration: none;
+}
+
+.comment-cancel>a{
+	font-size: 0.75em;
+	color: grey;
+	text-decoration: none;
+	padding-left: 2em;
+}
+
+

@@ -1,0 +1,26 @@
+{{ define "main" }}
+<main>
+    <section class="flex">
+    <!-- Ranges through content/posts/*.md -->
+    {{ range .Pages }}
+        <article class="post">
+                <div class="post-inner">
+                    <span class="post-date">{{.Date.Format "2006-01-02"}} </span>
+                    {{ if isset .Params "featured_image" }}
+                    {{ $original := resources.Get .Params.featured_image }}
+                    {{ .Scratch.Set "image" ($original.Fill "450x170") }}
+                    {{ $image := .Scratch.Get "image" }}
+                    <a href="{{.Permalink}}"><img src="{{$image.RelPermalink}}" /></a>
+                    {{ end }}
+                    <a class="post-title" href="{{.Permalink}}"><h2>{{.Title}}</h2></a>
+                    <p class="post-excerpt">
+                        {{ .Summary }}
+                    </p>
+                    <a class="post-read-more" href="{{.Permalink}}" ><button>read more</button></a>
+            </div>
+        </article>
+    {{ end }}
+      </section>
+</main>
+{{ end }}
+

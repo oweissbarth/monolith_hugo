@@ -1,0 +1,30 @@
+{{ define "main" }}
+<div class="sp_single_header">
+    {{ $original := resources.Get .Params.icon }}
+    {{ $image :=  ($original.Fill "200x200") }}
+    <img src="{{$image.RelPermalink}}" alt="" class="sp_single_icon"/>
+    <a target="_blank" href="{{.Params.repository}}" class="">
+        <i class="sp_github_link fa fa-2x fa-fw fa-github"></i>
+    </a>
+    <h1>{{ .Title }}</h1>
+    <h3 class="sp_single_tagline">{{ .Params.tagline }}</h3>
+    <a href="{{.Site.Params.staticsitecompanion_url}}/download/{{.Params.download_id}}" class="sp_single_download"><button class="sp_single_download">Download</button></a>
+</div>
+<div class="sp_single_clear"></div>
+<hr>
+{{ if isset .Params "images"}}
+    <div class="gallery-grid">
+        {{ range .Params.images }}
+            <div class="gallery-item">
+                {{ $original := resources.Get . }}
+                {{ $image :=  ($original.Fill "400x400") }}
+                <a class="glightbox" href="{{$original.RelPermalink}}"><img src="{{$image.RelPermalink}}" alt="" class=""/></a>
+            </div>
+            
+        {{ end }}
+    </div>
+    <hr>
+{{ end }}
+
+{{ .Content }}
+{{ end }}
