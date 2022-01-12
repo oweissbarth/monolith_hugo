@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     {{- partial "head.html" . -}}
-    <link rel="stylesheet" href="{{ "/css/onepage-scroll.css" | relURL }}" type="text/css"/>
-    <script src="{{ "/js/onepage-scroll.min.js" | relURL }}"></script>
+    <link rel="stylesheet" href="{{ "/css/fullpage.min.css" | relURL }}" type="text/css"/>
+    <script src="{{ "/js/fullpage.min.js" | relURL }}"></script>
     <body>
         <header class="fixed inverted">{{- partial "menu.html" . -}}</header>
 
-        <main id="pureFullPage">
-            <section class="page">
+        <main id="fullpage">
+            <section class="section" data-anchor="greeter">
                 <div class="greeter">
                     <div class="title-container">
                         <span class="site-title homepage">{{ .Site.Title}}</span>
@@ -20,8 +20,7 @@
                 </div>
                 <div class="greeter-overlay" ><img src="{{ "/images/pattern.png" | relURL }}"/></div>
             </section>
-            <section class="page">
-                <div class="content-centered">
+            <section class="section" data-anchor="about-me">
                     <h2 class="centered">About me</h2>
                     {{ $original := resources.Get .Site.Params.meImage }}
                     {{ .Scratch.Set "image" ($original.Fill "200x200") }}
@@ -30,10 +29,8 @@
                     <p class="centered">My Name is Oliver Weissbarth. I am a Software Engineer with a passion for computer graphics based in Berlin/Germany.</p>
                     <p class="centered">I enjoy creating graphics as well as creating tools for artists.</p>
                     <p class="centered">I am also interested in photography and other visual art forms.</p>
-                </div>
             </section>
-            <section class="page">
-                <div class="content-centered">
+            <section class="section" data-anchor="projects">
                     <h2 class="centered">Featured Projects</h2>
                     <div class="projects-container">
                         {{ range .Site.Params.project }}
@@ -48,19 +45,19 @@
                             </div>
                         </div>
                         {{ end }}
-                    </div>
                 </div>
             </section>
         </main>
         <script>
             function updateColorScheme(index){
-                if(index%2 == 1){
-                    setColorSchemeForNode(document.getElementsByClassName("onepage-pagination")[0], "light");
+                if(index%2 == 0){
+                    setColorSchemeForNode(document.getElementById("fp-nav"), "light");
                     setColorSchemeForNode(document.getElementsByClassName("nav")[0], "light");
                     setColorSchemeForNode(document.getElementsByClassName("menu-toggle-label")[0], "light");
 
                 }else{
-                    setColorSchemeForNode(document.getElementsByClassName("onepage-pagination")[0], "dark");
+                    console.log("setting to dark")
+                    setColorSchemeForNode(document.getElementById("fp-nav"), "dark");
                     setColorSchemeForNode(document.getElementsByClassName("nav")[0], "dark");
                     setColorSchemeForNode(document.getElementsByClassName("menu-toggle-label")[0], "dark");
                 }
@@ -77,12 +74,14 @@
             }
 
             (function(){
-                onePageScroll("main", {
-                    sectionContainer: "section",
-                    updateURL: true,
-                    beforeMove: updateColorScheme
+                new fullpage('#fullpage', {
+                    autoScrolling:true,
+                    licenseKey: "1E35757B-B00A4875-A5DD4B76-56D2B8C6",
+                    navigation: true,
+                    animateAnchor: false,
+                    onLeave: function(origin, destination, direction){updateColorScheme(destination.index)}
                 });
-                updateColorScheme(document.querySelector("section.active").dataset.index);
+                updateColorScheme(fullpage_api.getActiveSection().index);
             })();
             
         </script>

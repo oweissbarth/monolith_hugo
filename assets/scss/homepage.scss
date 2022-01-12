@@ -114,34 +114,23 @@
 	cursor: pointer;
 }
 
-.onepage-pagination.light li a::before {
+#fp-nav.light li a span {
 	background-color: white;
 	transition: background-color 1s ease;
 }
 
-.onepage-pagination.dark li a::before{
+#fp-nav.dark li a span {
 	background-color: black;
 	transition: background-color 1s ease;
 }
 
-.onepage-pagination.light li a.active::before {
-	background-color: white;
-	transition: background-color 1s ease;
-	border: none;
-}
 
-.onepage-pagination.dark li a.active::before{
-	background-color: black;
-	transition: background-color 1s ease;
-	border: none;
-}
-
-ul.onepage-pagination{
+div#fp-nav.fp-right{
 	right: 2px;
 }
 
 @media screen and (min-width: 700px) {
-	ul.onepage-pagination{
+	div#fp-nav.fp-right{
 		right: 10px;
 	}
 	
@@ -156,6 +145,10 @@ section.page:nth-child(2n){
 section.page:nth-child(2n+1){
 	background-color: $dark-background;
 	color: white;
+}
+
+.section{
+	padding: 0 1.5em 0 1.5em;
 }
 
 
