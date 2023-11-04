@@ -149,8 +149,8 @@ button{
 	margin-left: auto;
 	margin-right: auto;
 	word-wrap: break-word;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+	padding-left: 1em;
+	padding-right: 1em;
 	line-height: 1.6;
 	margin-bottom: 4em;
 }
@@ -346,4 +346,15 @@ input, textarea{
 	.gallery-columns-5>figure{
 		max-width: calc(100%/5);
 	}
+}
+
+
+.social-links{
+	display: flex;
+	justify-content: center;
+}
+.social-links > a{
+	color: inherit;
+	text-decoration: none;
+	padding: 0.5em;
 }

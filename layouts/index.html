@@ -29,7 +29,16 @@
                     <p class="centered">My Name is Oliver Weissbarth. I am a Software Engineer with a passion for computer graphics based in Berlin/Germany.</p>
                     <p class="centered">I enjoy creating graphics as well as creating tools for artists.</p>
                     <p class="centered">I am also interested in photography and other visual art forms.</p>
-            </section>
+                    <div class="social-links">
+                        {{ with .Site.Params.social }}
+                        {{ range sort . "weight" }}
+                                <a href="{{ .url | safeURL }}" aria-label="{{ .name }}" {{ if .rel }}rel="{{ .rel }}"{{ end }} {{ if .target }}target="{{ .target }}"{{ end }} {{ if .type }}type="{{ .type }}"{{ end }}>
+                                  <i class="{{ .icon }}" aria-hidden="true"></i>
+                                </a>
+                        {{ end }}
+                        {{ end }}
+                    </div>
+                </section>
             <section class="section" data-anchor="projects">
                     <h2 class="centered">Featured Projects</h2>
                     <div class="projects-container">

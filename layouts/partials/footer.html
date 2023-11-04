@@ -3,5 +3,14 @@
 <span class="footer text-center">{{.Site.Params.description}}</span>
 <span class="footer text-center">{{.Site.Params.email}}</span>
 <span class="footer text-center">{{.Site.Params.website}}</span>
+<div class="social-links">
+{{ with .Site.Params.social }}
+{{ range sort . "weight" }}
+        <a href="{{ .url | safeURL }}" aria-label="{{ .name }}" {{ if .rel }}rel="{{ .rel }}"{{ end }} {{ if .target }}target="{{ .target }}"{{ end }} {{ if .type }}type="{{ .type }}"{{ end }}>
+          <i class="{{ .icon }}" aria-hidden="true"></i>
+        </a>
+{{ end }}
+{{ end }}
+</div>
 <span class="footer text-center">Copyright © {{ now.Format "2006"}} {{.Site.Params.author}}</span>
 </footer>
