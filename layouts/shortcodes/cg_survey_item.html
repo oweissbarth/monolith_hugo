@@ -9,7 +9,7 @@
     <div class="credits">
         <div class="author">author: <b>{{ .Get "author" }}</b></div>
         <div class="title">title: <b>{{ .Get "title" }}</b></div>
-        {{ if isset . "sourceurl" }}
+        {{ if isset .Params "sourceurl" }}
         <div class="link">source: <a target="_blank" href="{{ .Get "sourceurl" }}">link</a></div>
         {{ end }}
     </div>
